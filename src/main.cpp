@@ -4,8 +4,6 @@
 #include "../BeerReciepeClass/BeerReciepeClass.h"
 #include "../UserInterfaceClass/UserInterfaceClass.h"
 
-#include <ApplicationMonitor.h>
-
 void setup(){
   //Serial.begin(9600);
   //Serial.println("ready");
