@@ -5,7 +5,10 @@
 #include "../UserInterfaceClass/UserInterfaceClass.h"
 
 void setup(){
-
+  if(DEBUGGING){
+    Serial.begin(9600);
+    Serial.println("ready");
+  }
   pinMode(ALARM_PIN, OUTPUT);
   digitalWrite(ALARM_PIN, LOW);
 

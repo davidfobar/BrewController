@@ -7,7 +7,7 @@
 const int TOO_SLOW = 0;
 const int JUST_RIGHT = 1;
 const int TOO_FAST = 2;
-const double TOO_SLOW_FLOW_THRESHOLD = 0.3;
+const double TOO_SLOW_FLOW_THRESHOLD = 0.1;
 const double TOO_FAST_FLOW_THRESHOLD = 1.4; // gallons per minute
 const int PULSE_TIMEOUT = 500;
 const int NUM_TO_SUM = 4;

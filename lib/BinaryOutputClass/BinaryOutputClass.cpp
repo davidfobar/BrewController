@@ -1,6 +1,6 @@
 #include "BinaryOutputClass.h"
 
-BinaryOutputClass::BinaryOutputClass(int outPin, int cntrPin, int inLogicType){
+BinaryOutputClass::BinaryOutputClass(int outPin, int inLogicType){
   outputPin = outPin;
   logicType = inLogicType;
 

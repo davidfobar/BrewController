@@ -45,7 +45,6 @@ int MainPageClass::getUserInput(int &userInput){
     else{
       if(currentCursorLine == LAST_LINE){
         thisBrewStand->nextStep();
-        thisBrewStand->printTimers();
       }
     }
   }
@@ -133,6 +132,9 @@ void MainPageClass::printOn(U8GLIB_ST7920_128X64_1X &lcd, int counter){
     else if(brewingStage == CHILL){
       lcd.drawStr(10, 14, F("Chill Wort"));
     }
+    else if(brewingStage == SETTLING){
+      lcd.drawStr(10, 14, F("Settle Wort"));
+    }
     else if(brewingStage == TRANSFER_TO_FERMENTER){
       lcd.drawStr(10, 14, F("Transfer Wort to Fermenter"));
     }
@@ -168,7 +170,8 @@ void MainPageClass::printOn(U8GLIB_ST7920_128X64_1X &lcd, int counter){
     else if(brewingStage == MASH_GRAINS ||
             brewingStage == MASHOUT_GRAINS ||
             brewingStage == SPARGE_GRAINS ||
-            brewingStage == BOIL ){
+            brewingStage == BOIL ||
+            brewingStage == SETTLING){
       lcd.drawStr(75, 53, F("Timer"));
       int totalSec = thisBrewStand->getNextTimer();
       int sec = totalSec % 60;

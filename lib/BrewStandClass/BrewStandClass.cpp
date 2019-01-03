@@ -2,11 +2,12 @@
 #include "../BeerReciepeClass/BeerReciepeClass.h"
 
 BrewStandClass::BrewStandClass() :
-                   hltHeater(HLT_HEAT_PIN, HLT_HEAT_SWITCH_PIN),
-                   boilCoil(BOIL_COIL_PIN, BOIL_COIL_SWITCH_PIN),
-                   rimsHeater(RIMS_HEATER_PIN, RIMS_HEAT_SWITCH_PIN),
-                   wortPump(WORT_PUMP_PIN, WORT_PUMP_SWITCH_PIN),
-                   waterPump(WATER_PUMP_PIN, WATER_PUMP_SWITCH_PIN),
+                   hltHeater(HLT_HEAT_PIN),
+                   boilCoil(BOIL_COIL_PIN),
+                   rimsHeater(RIMS_HEATER_PIN),
+                   wortPump(WORT_PUMP_PIN),
+                   waterPump(WATER_PUMP_PIN),
+                   waterValve(WATER_VALVE_PIN),
                    oneWire(ONE_WIRE_BUS),
                    tempProbeBus(&oneWire),
                    rimsFlowSensor(RIMS_FLOW_INPUT_PIN),
@@ -14,6 +15,35 @@ BrewStandClass::BrewStandClass() :
                    hltHeatPID(hltTemp, 500, 0, 0, 1000, hltHeater),
                    boilCoilPID(bkTemp, 500, 0, 0, 1000, boilCoil),
                    rimsHeatPID(rimsTemp, 500, 2, 8, 1000, rimsHeater){
+  bkSetpoint = 0;
+  rimsSetpoint = 0;
+  hltSetpoint = 0;
+
+  hltTempForNextStep = false;
+  bkTempForNextStep = false;
+  monitorWaterFlow = false;
+  brewingStage = NOT_BREWING;
+
+  mashingGrains = false;
+  mashingout = false;
+  collectingStrike = false;
+  collectingSparge = false;
+  heatingStrike = false;
+  heatingSparge = false;
+  transferingFirstRunnings = false;
+
+  grainAbsorption = 0.08;
+  kettleDeadSpace = 0.375;
+  mltToBkTransferLoss = 0.1;
+  hltToMltTransferLoss = 0.1;
+  boilOffRate = 1.2;
+  hltDiameter = 12.75;
+  grainTempAbsorbtionFactor = 0.2;
+  spargeTempLoss = 1.0;
+  pumpSanitizeTime = 1;
+  logThisIteration = false;
+  datalogPeriod = 1000;
+
   cancelAll();
 }
 
@@ -106,8 +136,14 @@ void BrewStandClass::update(){
     }
 
     if(monitorWaterFlow && waterInSensor.collectionComplete()){
-      if(collectingStrike)      ;//heatStrikeWater();
-      else if(collectingSparge) ;//heatSpargeWater();
+      if(collectingStrike){
+        waterValve.turnOff();
+        heatStrikeWater();
+      }
+      else if(collectingSparge){
+        waterValve.turnOff();
+        heatSpargeWater();
+      }
     }
 
     if(hltTempForNextStep){
@@ -126,6 +162,7 @@ void BrewStandClass::update(){
       else if(brewingStage == CHILL){
         if(int(bkTemp.getTemperature()) <= thisReciepe->getChillingTemp()){
           brewTimer.addTimer(SETTLE_TIME, TRANSFER_TO_FERMENTER);
+          brewingStage = SETTLING;
         }
       }
     }
@@ -138,6 +175,7 @@ void BrewStandClass::cancelAll(){
     waterPump.turnOff();
     wortPump.turnOff();
   }
+  waterValve.turnOff();
   bkSetpoint = 0;
   rimsSetpoint = 0;
   hltSetpoint = 0;
@@ -200,7 +238,8 @@ void BrewStandClass::nextStep(){
   else if(brewingStage == TRANSFER_SECOND_RUNNINGS)     startBoil();
   else if(brewingStage == STARTING_BOIL)                boil();
   else if(brewingStage == BOIL)                         chillWort();
-  else if(brewingStage == CHILL)                        transferWortToFermenter();
+  else if(brewingStage == CHILL)                        brewingStage = SETTLING;
+  else if(brewingStage == SETTLING)                     transferWortToFermenter();
   else if(brewingStage == TRANSFER_TO_FERMENTER)        cleanBrewStand();
   else if(brewingStage == CLEANING_BREWSTAND)           cancelAll();
 }
@@ -214,11 +253,14 @@ void BrewStandClass::collectStrikeWater(){
   brewingStage = COLLECTING_STRIKE;
   collectingStrike = true;
   monitorWaterFlow = true;
+  waterValve.turnOn();
+  waterInSensor.collectWater(thisReciepe->getVolStrikeWater());
   //monitor water in for stirke volume
 }
 
 void BrewStandClass::heatStrikeWater(){
   brewingStage = HEATING_STRIKE;
+  waterValve.turnOff();
   heatingStrike = true;
   collectingStrike = false;
   monitorWaterFlow = false;
@@ -270,11 +312,14 @@ void BrewStandClass::mashoutGrains(){
 void BrewStandClass::collectSpargeWater(){
   monitorWaterFlow = true;
   collectingSparge = true;
+  waterValve.turnOn();
+  waterInSensor.collectWater(thisReciepe->getVolSpargeWater());
   //monitor water in for sparge volume
 }
 
 void BrewStandClass::heatSpargeWater(){
   brewingStage = MASH_WHILE_HEATING_SPARGE;
+  waterValve.turnOff();
   collectingSparge = false;
   monitorWaterFlow = false;
   heatingSparge = true;

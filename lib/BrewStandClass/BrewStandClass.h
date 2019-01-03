@@ -59,7 +59,7 @@ const int HLT_DIAMETER = 20;
 
 const int BOIL_TIMER_START_TEMP = 208;
 const double BOIL_TEMP = 212;
-const int SETTLE_TIME = 15;
+const int SETTLE_TIME = 1;
 const double MIN_KETTLE_VOL = 5.0;
 
 class BeerReciepeClass;
@@ -67,7 +67,7 @@ class BeerReciepeClass;
 class BrewStandClass{
   private:
     BinaryOutputClass hltHeater, boilCoil, rimsHeater;
-    BinaryOutputClass wortPump, waterPump;
+    BinaryOutputClass wortPump, waterPump, waterValve;
     OneWire oneWire;
     DallasTemperature tempProbeBus;
     TemperatureClass rimsTemp, bkTemp, hltTemp;
@@ -79,32 +79,32 @@ class BrewStandClass{
 
     BeerReciepeClass *thisReciepe;
 
-    double bkSetpoint = 0;
-    double rimsSetpoint = 0;
-    double hltSetpoint = 0;
+    double bkSetpoint;
+    double rimsSetpoint;
+    double hltSetpoint;
 
-    bool hltTempForNextStep = false;
-    bool bkTempForNextStep = false;
-    bool monitorWaterFlow = false;
-    int brewingStage = NOT_BREWING;
+    bool hltTempForNextStep;
+    bool bkTempForNextStep;
+    bool monitorWaterFlow;
+    int brewingStage;
 
-    bool mashingGrains = false;
-    bool mashingout = false;
-    bool collectingStrike = false;
-    bool collectingSparge = false;
-    bool heatingStrike = false;
-    bool heatingSparge = false;
-    bool transferingFirstRunnings = false;
+    bool mashingGrains;
+    bool mashingout;
+    bool collectingStrike;
+    bool collectingSparge;
+    bool heatingStrike;
+    bool heatingSparge;
+    bool transferingFirstRunnings;
 
-    double grainAbsorption = 0.08;
-    double kettleDeadSpace = 0.375;
-    double mltToBkTransferLoss = 0.1;
-    double hltToMltTransferLoss = 0.1;
-    double boilOffRate = 1.2;
-    double hltDiameter = 12.75;
-    double grainTempAbsorbtionFactor = 0.2;
-    double spargeTempLoss = 1.0;
-    int pumpSanitizeTime = 1;
+    double grainAbsorption;
+    double kettleDeadSpace;
+    double mltToBkTransferLoss;
+    double hltToMltTransferLoss;
+    double boilOffRate;
+    double hltDiameter;
+    double grainTempAbsorbtionFactor;
+    double spargeTempLoss;
+    int pumpSanitizeTime;
 
     void collectStrikeWater();
     void heatStrikeWater();
@@ -126,9 +126,9 @@ class BrewStandClass{
     void addHops(int hopperNum);
     void loadBrewStandSettings();
 
-    bool logThisIteration = false;
+    bool logThisIteration;
     unsigned long datalogTimeStamp;
-    unsigned long datalogPeriod = 1000;
+    unsigned long datalogPeriod;
 
   public:
     BrewStandClass();

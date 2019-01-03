@@ -3,9 +3,12 @@
 
 #include "Arduino.h"
 
+const bool DEBUGGING = true;
+
 const int MILLIS_PER_SECOND = 1000;
 const int SEC_PER_MIN = 60;
 const int MIN_PER_HOUR = 60;
+const int NUM_TIMERS = 10;
 
 //stages of brewing
 const int NOT_BREWING                  = 0;
@@ -25,9 +28,10 @@ const int STARTING_BOIL                = 13;
 const int BOIL                         = 14;
 const int SANITIZE_PUMP                = 15;
 const int CHILL                        = 16;
-const int TRANSFER_TO_FERMENTER        = 17;
-const int CLEANING_BREWSTAND           = 18;
-const int MANUAL_CONTROL               = 19;
+const int SETTLING                     = 17;
+const int TRANSFER_TO_FERMENTER        = 18;
+const int CLEANING_BREWSTAND           = 19;
+const int MANUAL_CONTROL               = 20;
 
 const int ADD_HOP0 = 20;
 const int ADD_HOP1 = 21;
@@ -52,11 +56,12 @@ const int WORT_PUMP_PIN = 11;
 const int BOIL_COIL_PIN = 8;
 const int RIMS_HEATER_PIN = 12;
 const int WATER_PUMP_PIN = 10;
+const int WATER_VALVE_PIN = 5;
 
 //inputs
 const int ONE_WIRE_BUS = 3;
 const int RIMS_FLOW_INPUT_PIN = 2;
-const int WATER_IN_INPUT_PIN = 1;
+const int WATER_IN_INPUT_PIN = 4;
 const int BOIL_COIL_SWITCH_PIN = 31;
 const int HLT_HEAT_SWITCH_PIN = 33;
 const int WATER_PUMP_SWITCH_PIN = 35;

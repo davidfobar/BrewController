@@ -9,15 +9,26 @@ BrewTimerClass::BrewTimerClass(){
 }
 
 void BrewTimerClass::clearAll(){
+  if(DEBUGGING) Serial.println();
+  if(DEBUGGING) Serial.println("  clearing timers");
+  if(DEBUGGING) printTimers();
   TimerNodeClass *temp = NULL;
   while(head != NULL){
     temp = head->getNext();
     delete head;
     head = temp;
   }
+  if(DEBUGGING) printTimers();
+  if(DEBUGGING) Serial.println("  timer clearing complete");
 }
 
 void BrewTimerClass::addTimer(int length, int callBack){
+  if(DEBUGGING) Serial.println();
+  if(DEBUGGING) Serial.print("  adding timer with event and length ");
+  if(DEBUGGING) Serial.print(callBack);
+  if(DEBUGGING) Serial.print(" ");
+  if(DEBUGGING) Serial.println(length);
+  if(DEBUGGING) printTimers();
   int endTimeSec = curSec + length * SEC_PER_MIN;
   TimerNodeClass *newTimer = new TimerNodeClass(endTimeSec, callBack);
   if(head == NULL){
@@ -40,6 +51,8 @@ void BrewTimerClass::addTimer(int length, int callBack){
     }
     newTimer->setPrevAndNext(temp->getPrev(), temp);
   }
+  if(DEBUGGING) printTimers();
+  if(DEBUGGING) Serial.println("  timer adding complete");
 }
 
 int BrewTimerClass::update(){
@@ -49,22 +62,33 @@ int BrewTimerClass::update(){
   if(millisPassed > MILLIS_PER_SECOND){
     curSec++;
     prevSecTic += MILLIS_PER_SECOND;
+    if(DEBUGGING) Serial.print(curSec);
+    if(DEBUGGING) Serial.print("\r");
   }
 
   if(head != NULL){
     int tempResult = head->isExpired(curSec);
     if(tempResult != NO_UPDATE){
+      if(DEBUGGING) Serial.println();
+      if(DEBUGGING) Serial.println("  head expired");
+      if(DEBUGGING) printTimers();
       result = tempResult;
       TimerNodeClass *temp = head->getNext();
       delete head;
       head = temp;
-      temp->setPrev(NULL);
+      if(temp != NULL) temp->setPrev(NULL);
+      if(DEBUGGING) printTimers();
+      if(DEBUGGING) Serial.println("  update complete");
     }
   }
   return result;
 }
 
 void BrewTimerClass::cancelTimer(int callBack){
+  if(DEBUGGING) Serial.println();
+  if(DEBUGGING) Serial.print("  attempting to cancel timer: ");
+  if(DEBUGGING) Serial.println(callBack);
+  if(DEBUGGING) printTimers();
   TimerNodeClass *temp = head;
   while(temp != NULL){
     TimerNodeClass *tempNext = temp->getNext();
@@ -81,6 +105,8 @@ void BrewTimerClass::cancelTimer(int callBack){
     }
     temp = tempNext;
   }
+  if(DEBUGGING) printTimers();
+  if(DEBUGGING) Serial.println("  cancel timers complete");
 }
 
 int BrewTimerClass::getNextTimerInSec(){
@@ -90,7 +116,12 @@ int BrewTimerClass::getNextTimerInSec(){
 
 void BrewTimerClass::printTimers(){
   TimerNodeClass *temp = head;
+  if(DEBUGGING) Serial.print("    current timers: ");
+  if(DEBUGGING && temp == NULL) Serial.print("no timers in quene");
   while(temp != NULL){
+    if(DEBUGGING) Serial.print(temp->getTimerEvent());
+    if(DEBUGGING) Serial.print(" ");
     temp = temp->getNext();
   }
+  if(DEBUGGING) Serial.println();
 }

@@ -16,7 +16,7 @@ class BinaryOutputClass{
   public:
     //sets the arduino pin using pinMode(), if inLogicType == 1, then the OUTPUT
     //  pin is held high when turnOn is executed.
-    BinaryOutputClass(int outPin, int cntrPin, int inLogicType = 1);
+    BinaryOutputClass(int outPin, int inLogicType = 1);
 
     //returns the current state of the output
     bool getState();

@@ -25,13 +25,13 @@ class BeerReciepeClass{
     double mashRatio = 1.5;
     double mashTemp = 152;
     int tempAtStartup = 0;
-    int mashLength = 30;
+    int mashLength = 2;
     int mashoutTemp = 170;
-    int mashoutLength = 10;
-    int spargeLength = 10;
-    int boilLength = 20;
+    int mashoutLength = 1;
+    int spargeLength = 1;
+    int boilLength = 5;
     int chillTemp = 75;
-    int hopAddition[4] = {20, 15, 5, 0};
+    int hopAddition[4] = {1, 2, 4, 0};
 
     int hopTimer[4] = {0};
 
