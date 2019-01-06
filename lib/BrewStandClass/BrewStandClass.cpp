@@ -112,6 +112,7 @@ void BrewStandClass::update(){
   hltTemp.updateTemp();
 
   rimsFlowSensor.updateFlowRate();
+  waterInSensor.updateFlowRate();
 
   hltHeatPID.checkPIDandOperateRelay();
   boilCoilPID.checkPIDandOperateRelay();

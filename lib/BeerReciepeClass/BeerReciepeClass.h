@@ -20,7 +20,7 @@ class BrewStandClass;
 
 class BeerReciepeClass{
   private:
-    double grainBillWeight = 20.0;
+    double grainBillWeight = 1.0;
     double desiredVolume = 10.0;
     double mashRatio = 1.5;
     double mashTemp = 152;

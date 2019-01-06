@@ -62,7 +62,7 @@ bool LiquidFlowSensorClass::collectionComplete(){
   else return false;
 }
 void LiquidFlowSensorClass::collectWater(double volume){
-  //450 pulses per liter, 0.264 liters to a gallon.
-  pulsesToCollect = int(volume * 0.264 * 450.0);
+  //450 pulses per liter, 0.264 gallons in a liter. 0.71 correction factor.
+  pulsesToCollect = int(volume * 450.0 * 0.71 / 0.264);
   integrating = true;
 }
