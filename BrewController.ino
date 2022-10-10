@@ -1,8 +1,8 @@
 
 #include <Arduino.h>
-#include "../BrewStandClass/BrewStandClass.h"
-#include "../BeerReciepeClass/BeerReciepeClass.h"
-#include "../UserInterfaceClass/UserInterfaceClass.h"
+#include "./BrewStandClass.h"
+#include "./BeerReciepeClass.h"
+#include "./UserInterfaceClass.h"
 
 void setup(){
   if(DEBUGGING){

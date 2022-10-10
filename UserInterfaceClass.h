@@ -2,15 +2,15 @@
 #define USER_INTFACE_CLASS_h
 
 #include "Arduino.h"
-#include "../BrewStandClass/BrewStandClass.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../BeerReciepeClass/BeerReciepeClass.h"
+#include "./BrewStandClass.h"
+#include "./RotaryInputClass.h"
+#include "./BeerReciepeClass.h"
 #include "MainPageClass.h"
 #include "ReciepePageClass.h"
 #include "BrewStandSettingsPageClass.h"
 #include "ManualPageClass.h"
 #include <U8glib.h>
-#include "../constants.h"
+#include "./constants.h"
 
 const int MIN_REFRESH_INTERVAL = 200; //ms
 const int MAX_REFRESH_INTERVAL = 500; //ms

@@ -2,11 +2,11 @@
 #define BREW_STAND_SETTINGS_PAGE_h
 
 #include "Arduino.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../BrewStandClass/BrewStandClass.h"
+#include "./RotaryInputClass.h"
+#include "./BrewStandClass.h"
 #include <U8glib.h>
-#include "bitmaps.inl"
-#include "../constants.h"
+#include "bitmaps.h"
+#include "./constants.h"
 
 class BrewStandSettingsPageClass{
   private:

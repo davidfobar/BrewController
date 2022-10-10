@@ -2,7 +2,7 @@
 #define LIQUID_FLOW_SENSOR_CLASS_h
 
 #include "Arduino.h"
-#include "../constants.h"
+#include "./constants.h"
 
 const int TOO_SLOW = 0;
 const int JUST_RIGHT = 1;

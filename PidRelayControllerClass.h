@@ -3,9 +3,9 @@
 
 #include <PID_v1.h>
 #include "Arduino.h"
-#include "../BinaryOutputClass/BinaryOutputClass.h"
-#include "../TemperatureClass/TemperatureClass.h"
-#include "../constants.h"
+#include "./BinaryOutputClass.h"
+#include "./TemperatureClass.h"
+#include "./constants.h"
 
 class PidRelayControllerClass{
   private:

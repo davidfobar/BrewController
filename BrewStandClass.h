@@ -4,13 +4,13 @@
 //#define FULL_AUTOMATION
 
 #include "Arduino.h"
-#include "../BinaryOutputClass/BinaryOutputClass.h"
-#include "../LiquidFlowSensorClass/LiquidFlowSensorClass.h"
-#include "../TemperatureClass/TemperatureClass.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../PidRelayControllerClass/PidRelayControllerClass.h"
-#include "../BrewTimerClass/BrewTimerClass.h"
-#include "../constants.h"
+#include "./BinaryOutputClass.h"
+#include "./LiquidFlowSensorClass.h"
+#include "./TemperatureClass.h"
+#include "./RotaryInputClass.h"
+#include "./PidRelayControllerClass.h"
+#include "./BrewTimerClass.h"
+#include "./constants.h"
 #include <OneWire.h>
 #include <DallasTemperature.h>
 #include <EEPROM.h>

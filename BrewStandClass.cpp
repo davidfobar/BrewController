@@ -1,5 +1,5 @@
 #include "BrewStandClass.h"
-#include "../BeerReciepeClass/BeerReciepeClass.h"
+#include "./BeerReciepeClass.h"
 
 BrewStandClass::BrewStandClass() :
                    hltHeater(HLT_HEAT_PIN),

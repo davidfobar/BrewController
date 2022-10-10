@@ -2,11 +2,11 @@
 #define RECIEPE_PAGE_CLASS_h
 
 #include "Arduino.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../BeerReciepeClass/BeerReciepeClass.h"
+#include "./RotaryInputClass.h"
+#include "./BeerReciepeClass.h"
 #include <U8glib.h>
-#include "bitmaps.inl"
-#include "../constants.h"
+#include "bitmaps.h"
+#include "./constants.h"
 
 class ReciepePageClass{
   private:

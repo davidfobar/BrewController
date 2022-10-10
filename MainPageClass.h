@@ -2,13 +2,13 @@
 #define MAIN_PAGE_CLASS_h
 
 #include "Arduino.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../BeerReciepeClass/BeerReciepeClass.h"
-#include "../BinaryInputClass/BinaryInputClass.h"
-#include "../BrewStandClass/BrewStandClass.h"
+#include ".//RotaryInputClass.h"
+#include ".//BeerReciepeClass.h"
+#include ".//BinaryInputClass.h"
+#include ".//BrewStandClass.h"
 #include <U8glib.h>
-#include "bitmaps.inl"
-#include "../constants.h"
+#include "bitmaps.h"
+#include "./constants.h"
 
 class MainPageClass{
   private:

@@ -2,7 +2,7 @@
 #define BINARY_INPUT_CLASS_h
 
 #include "Arduino.h"
-#include "../constants.h"
+#include "./constants.h"
 
 const unsigned int DEBOUNCE_TIME = 10; //milliseconds
 

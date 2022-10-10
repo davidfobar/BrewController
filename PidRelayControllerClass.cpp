@@ -1,4 +1,4 @@
-#include "../PidRelayControllerClass/PidRelayControllerClass.h"
+#include "./PidRelayControllerClass.h"
 
 void PidRelayControllerClass::changeSetpointTo(double newSetpoint){
   setpoint = newSetpoint;

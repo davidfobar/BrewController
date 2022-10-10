@@ -2,7 +2,7 @@
 #define BINARY_OUTPUT_CLASS_h
 
 #include "Arduino.h"
-#include "../constants.h"
+#include "./constants.h"
 //#include "../BinaryInputClass/BinaryInputClass.h"
 
 const int ACTIVE_HIGH = 1;

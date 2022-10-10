@@ -3,7 +3,7 @@
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#include "../constants.h"
+#include "./constants.h"
 
 const int CONVERSION_TIME = 380;
 const int TEMP_PROBE_RESOLUTION = 11; //bits

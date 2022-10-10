@@ -2,11 +2,11 @@
 #define MANUAL_PAGE_CLASS_h
 
 #include "Arduino.h"
-#include "../RotaryInputClass/RotaryInputClass.h"
-#include "../BrewStandClass/BrewStandClass.h"
+#include "./RotaryInputClass.h"
+#include "./BrewStandClass.h"
 #include <U8glib.h>
-#include "bitmaps.inl"
-#include "../constants.h"
+#include "bitmaps.h"
+#include "./constants.h"
 
 const int MANUAL_CONTROL_NONE = 0;
 const int MANUAL_CONTROL_BK = 1;

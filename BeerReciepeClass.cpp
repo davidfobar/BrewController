@@ -1,5 +1,5 @@
-#include "../BeerReciepeClass/BeerReciepeClass.h"
-#include "../BrewStandClass/BrewStandClass.h"
+#include "./BeerReciepeClass.h"
+#include "./BrewStandClass.h"
 
 void BeerReciepeClass::makeAdjustment(int lineNum, int dir){
   if(lineNum == GRAIN_BILL_LINE){

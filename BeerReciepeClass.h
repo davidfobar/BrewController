@@ -2,7 +2,7 @@
 #define BEER_RECIEPE_CLASS_h
 
 #include "Arduino.h"
-#include "../constants.h"
+#include "./constants.h"
 
 //reciepe page line options
 const int GRAIN_BILL_LINE = 0;

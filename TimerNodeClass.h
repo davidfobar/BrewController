@@ -2,7 +2,7 @@
 #define TIMER_NODE_CLASS_h
 
 #include "Arduino.h"
-#include "../constants.h"
+#include "./constants.h"
 
 class BrewStandClass;
 

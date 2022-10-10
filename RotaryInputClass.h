@@ -5,7 +5,7 @@
 #include <Rotary.h>
 //#include <TimerOne.h>
 //#include <Ticker.h>
-#include "../constants.h"
+#include "./constants.h"
 
 const unsigned long TIMER_LENGTH = 2; //ms
 const int ROTARY_DEBOUNCE_TIME = 10; //ms
